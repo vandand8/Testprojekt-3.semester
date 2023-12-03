@@ -130,22 +130,46 @@ public class DataService
         return db.Laegemiddler.ToList();
     }
 
-    public PN OpretPN(int patientId, int laegemiddelId, double antal, DateTime startDato, DateTime slutDato) {
-        // TODO: Implement!
-        return null!;
+    public PN OpretPN(int patientId, int laegemiddelId, double antal, DateTime startDato, DateTime slutDato)
+    {
+        // TODO: Implement! - Færdig?
+        var patient = db.Patienter.Find(patientId);
+        var laegemiddel = db.Laegemiddler.Find(laegemiddelId);
+        var pn = new PN(startDato, slutDato, antal, laegemiddel);
+
+        patient.ordinationer.Add(pn);
+
+        return pn;
+        //return null!;?
     }
 
     public DagligFast OpretDagligFast(int patientId, int laegemiddelId, 
         double antalMorgen, double antalMiddag, double antalAften, double antalNat, 
-        DateTime startDato, DateTime slutDato) {
+        DateTime startDato, DateTime slutDato)
+    {
 
-        // TODO: Implement!
-        return null!;
+        // TODO: Implement! - Færdig?
+        var patient = db.Patienter.Find(patientId);
+        var laegemiddel = db.Laegemiddler.Find(laegemiddelId);
+        var dagligFast = new DagligFast(startDato, slutDato, laegemiddel, antalMorgen, antalMiddag, antalAften, antalNat);
+
+        patient.ordinationer.Add(dagligFast);
+        //return null!;?
+        return dagligFast;
     }
 
-    public DagligSkæv OpretDagligSkaev(int patientId, int laegemiddelId, Dosis[] doser, DateTime startDato, DateTime slutDato) {
+    public DagligSkæv OpretDagligSkaev(int patientId, int laegemiddelId, Dosis[] doser, DateTime startDato, DateTime slutDato)
+    {
         // TODO: Implement!
-        return null!;
+        var patient = db.Patienter.Find(patientId);
+        var laegemiddel = db.Laegemiddler.Find(laegemiddelId);
+        var dagligSkæv = new DagligSkæv(startDato, slutDato, laegemiddel, doser);
+
+        patient.ordinationer.Add(dagligSkæv);
+        db.SaveChanges();
+
+        return dagligSkæv;
+        //return null!;?
     }
 
     public string AnvendOrdination(int id, Dato dato) {

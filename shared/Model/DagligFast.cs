@@ -24,8 +24,8 @@ public class DagligFast : Ordination {
 	}
 
 	public override double doegnDosis() {
-		// TODO: Implement!
-		return (MorgenDosis.antal + MiddagDosis.antal + AftenDosis.antal + NatDosis.antal) / 4;
+		// TODO: Implement! - Færdig?
+		return (MorgenDosis.antal + MiddagDosis.antal + AftenDosis.antal + NatDosis.antal);
         //return -1;?
 	}
 	
