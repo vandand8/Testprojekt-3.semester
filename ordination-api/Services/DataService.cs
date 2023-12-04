@@ -184,9 +184,34 @@ public class DataService
     /// <param name="patient"></param>
     /// <param name="laegemiddel"></param>
     /// <returns></returns>
-	public double GetAnbefaletDosisPerDøgn(int patientId, int laegemiddelId) {
-        // TODO: Implement!
-        return -1;
+	public double GetAnbefaletDosisPerDøgn(int patientId, int laegemiddelId)
+    {
+        // TODO: Implement! - Færdig?
+        var patient = db.Patienter.Find(patientId);
+        var laegemiddel = db.Laegemiddler.Find(laegemiddelId);
+
+        if (patient == null || laegemiddel == null)
+        {
+            return -1;//fejlværdi - hvis patienten eller lægemidlet ikke findes
+        }
+
+        //Anbefalet dosis pr.døgn
+        double dosis = 0;
+        if (patient.vaegt < 25)
+        {
+            dosis = patient.vaegt * laegemiddel.enhedPrKgPrDoegnLet;
+        }
+        else if (patient.vaegt <= 120 )
+        {
+            dosis = patient.vaegt * laegemiddel.enhedPrKgPrDoegnNormal;
+        }
+        else
+        {
+            dosis = patient.vaegt * laegemiddel.enhedPrKgPrDoegnTung;
+        }
+
+        return dosis;
+        //return -1;?
 	}
     
 }
