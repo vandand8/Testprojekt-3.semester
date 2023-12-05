@@ -18,23 +18,26 @@ public class DagligFast : Ordination {
     public DagligFast() : base(null!, new DateTime(), new DateTime()) {
     }
 
-	public override double samletDosis() {
-		
+	public override double samletDosis()
+	{
 		return base.antalDage() * doegnDosis();
 	}
 
-	public override double doegnDosis() {
+	public override double doegnDosis()
+	{
 		// TODO: Implement! - Færdig?
 		return (MorgenDosis.antal + MiddagDosis.antal + AftenDosis.antal + NatDosis.antal);
         //return -1;?
 	}
 	
-	public Dosis[] getDoser() {
+	public Dosis[] getDoser()
+	{
 		Dosis[] doser = {MorgenDosis, MiddagDosis, AftenDosis, NatDosis};
 		return doser;
 	}
 
-	public override String getType() {
+	public override String getType()
+	{
 		return "DagligFast";
 	}
 }

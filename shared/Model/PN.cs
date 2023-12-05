@@ -16,7 +16,8 @@ public class PN : Ordination {
     /// Returnerer true hvis givesDen er inden for ordinationens gyldighedsperiode og datoen huskes
     /// Returner false ellers og datoen givesDen ignoreres
     /// </summary>
-    public bool givDosis(Dato givesDen) {
+    public bool givDosis(Dato givesDen)
+    {
         // TODO: Implement! - Færdig?
         if (givesDen.dato >= startDen && givesDen.dato <= slutDen)
         {
@@ -26,18 +27,21 @@ public class PN : Ordination {
         return false;
     }
 
-    public override double doegnDosis() {
+    public override double doegnDosis()
+    {
         // TODO: Implement! - Færdig?
         return dates.Count > 0 ? (antalEnheder * dates.Count) / antalDage() : 0;
         //return -1;?
     }
 
 
-    public override double samletDosis() {
+    public override double samletDosis()
+    {
         return dates.Count() * antalEnheder;
     }
 
-    public int getAntalGangeGivet() {
+    public int getAntalGangeGivet()
+    {
         return dates.Count();
     }
 

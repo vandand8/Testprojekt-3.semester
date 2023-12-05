@@ -160,7 +160,7 @@ public class DataService
 
     public DagligSkæv OpretDagligSkaev(int patientId, int laegemiddelId, Dosis[] doser, DateTime startDato, DateTime slutDato)
     {
-        // TODO: Implement!
+        // TODO: Implement! - Færdig?
         var patient = db.Patienter.Find(patientId);
         var laegemiddel = db.Laegemiddler.Find(laegemiddelId);
         var dagligSkæv = new DagligSkæv(startDato, slutDato, laegemiddel, doser);
@@ -173,7 +173,22 @@ public class DataService
     }
 
     public string AnvendOrdination(int id, Dato dato) {
-        // TODO: Implement!
+        // TODO: Implement! - Ikke færdigt?
+        var ordination = db.Ordinationer.Find(id);
+
+        if (ordination == null)
+        {
+            return "Ordination er ikke fundet";
+        }
+
+        if (dato.dato < ordination.startDen || dato.dato > ordination.slutDen)
+        {
+            return "Datoen er uden for ordinations periode";
+        }
+
+        //Registrer anvendelse????........
+
+        db.SaveChanges();
         return null!;
     }
 
