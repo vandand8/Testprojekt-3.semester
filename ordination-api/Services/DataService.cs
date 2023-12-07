@@ -139,6 +139,7 @@ public class DataService
 
         patient.ordinationer.Add(pn);
 
+        db.SaveChanges();
         return pn;
         //return null!;?
     }
@@ -155,6 +156,8 @@ public class DataService
 
         patient.ordinationer.Add(dagligFast);
         //return null!;?
+
+        db.SaveChanges();
         return dagligFast;
     }
 
@@ -173,7 +176,7 @@ public class DataService
     }
 
     public string AnvendOrdination(int id, Dato dato) {
-        // TODO: Implement! - Ikke færdigt?
+        // TODO: Implement! - færdig?
         var ordination = db.Ordinationer.Find(id);
 
         if (ordination == null)
@@ -181,15 +184,23 @@ public class DataService
             return "Ordination er ikke fundet";
         }
 
-        if (dato.dato < ordination.startDen || dato.dato > ordination.slutDen)
+        if (!(ordination is PN pnOrdination))
         {
-            return "Datoen er uden for ordinations periode";
+            return "Det er kun PN-ordinationer, som kan anvendes.";
         }
 
-        //Registrer anvendelse????........
+        if (pnOrdination.givDosis(dato))
+        {
+            db.SaveChanges();
+            return "PN-ordination er nu anvendt.";
+        }
+        else
+        {
+            return "Datoen er ugyldig";
+        }
 
         db.SaveChanges();
-        return null!;
+        //return null!;?
     }
 
     /// <summary>
